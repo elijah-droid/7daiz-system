@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10">
+        <div style="padding-top: 50;" class="text-center mb-3">
+            <img width="100" src="{% static 'img/7logo.png' %}" alt="">
+        </div>
+        <div class="card my-5">
+          <div class="card-header bg-dark text-white">
+            <h4 class="mb-0 text-white">Signup</h4>
+          </div>
+          <div class="card-body">
+            <form method="post">
+              {% csrf_token %}
+              {% if error %}
+                <div class="alert alert-danger text-nowrap">{{ error }}</div>
+              {% endif %}
+              <div class="form-group mb-3">
+                <label for="username">First Name:</label>
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name">
+              </div>
+              <div class="form-group mb-3">
+                <label for="username">Last Name:</label>
+                <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name">
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Code:</label>
+                <input type="number" class="form-control" id="code" name="code" placeholder="Enter the code sent.">
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+              </div>
+              <div class="form-group mb-3">
+                <label for="password">Confirm Password:</label>
+                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm password">
+              </div>
+              <button type="submit" id="login-button" type="submit"  class="btn btn-sm btn-dark">Proceed</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock %}

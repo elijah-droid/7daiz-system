@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding-top: 50;" class="container text-dark">
+    <div class="text-center">
+        <small class="lead">Stock</small>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <small class="lead text-dark"></small>
+        <a href="{% url 'add-product' %}" class="btn btn-sm btn-dark">Add Product</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark">
+            <thead>
+                <tr class="text-dark">
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th class="text-nowrap" scope="col">Items Left</th>
+                    <th class="text-nowrap" scope="col">Items Sold</th>
+                    <th class="text-nowrap" scope="col">Alert Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tally in tallies %}
+                <tr>
+                    <td class="text-nowrap text-dark">{{tally.Score.Subject}}</td>
+                    <td class="text-nowrap text-dark">{{tally.Score.Report.Student}}</td>
+                    <td class="text-nowrap">{{tally.Score.Report.Examination}}</td>
+                    <td class="text-nowrap">{{tally.From}}</td>
+                    <td class="text-nowrap">{{tally.To}}</td>
+                    <td class="text-nowrap">
+                        <a href="" class="btn btn-sm btn-dark">Reverse</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No sales for today.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
