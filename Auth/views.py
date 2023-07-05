@@ -32,7 +32,7 @@ def confirm_email(request):
         send_mail(
             'Email Confirmation',
             message,
-            '7daiz <info@edu-metrics.com>'
+            '7daiz <info@edu-metrics.com>',
             [request.POST['email'],]
         )
         try:
