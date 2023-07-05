@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.core.mail import send_mail
 import random
-from .models import EmailConfimation
+from .models import EmailConfirmation
 
 def generate_otp():
     code = random.randint(111111, 999999)
