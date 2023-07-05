@@ -55,7 +55,7 @@ def signup(request, confirmation):
         if int(request.POST['code']) == confirmation.code:
             data = request.POST
             user = User.objects.create(
-                username=confirmation.email
+                username=confirmation.email,
                 first_name=data['firstname'],
                 last_name=data['lastname'],
                 email=confirmation.email,
