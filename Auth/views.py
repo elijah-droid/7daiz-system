@@ -64,7 +64,7 @@ def signup(request, confirmation):
                     email=confirmation.email,
                     password=make_password(request.POST['password'])
                 )
-                message.success(request, 'Account created successfully.')
+                messages.success(request, 'Account created successfully.')
                 return redirect('login')
             else:
                 messages.success(request, 'Passwords do not match.')
