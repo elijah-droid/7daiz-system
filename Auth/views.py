@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, make_password
 from django.contrib import messages
 from django.core.mail import send_mail
 import random
@@ -50,7 +50,22 @@ def confirm_email(request):
         return render(request, 'confirm_email.html')
 
 def signup(request, confirmation):
-    return render(request, 'signup.html')
+    confirmation = EmailConfirmation.objects.get(id=confirmation)
+    if request.method == 'POST':
+        if int(request.POST['code']) == confirmation.code:
+            data = request.POST
+            user = User.objects.create(
+                username=confirmation.email
+                first_name=data['firstname'],
+                last_name=data['lastname'],
+                email=confirmation.email,
+                password=make_password(request.POST['password'])
+            )
+            message.success(request, 'Account created successfully.')
+        else:
+            messages.success(request, 'Invalid Code')
+    else:
+        return render(request, 'signup.html')
 
 def forgot_password(request):
     if request.method == 'POST':
@@ -61,6 +76,7 @@ def forgot_password(request):
 
 def reset_password(request, reset):
     if request.method == 'POST':
+        
         return redirect('login')
     else:
         return render(request, 'reset_password.html')
