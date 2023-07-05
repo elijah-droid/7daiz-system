@@ -11,7 +11,7 @@ def generate_otp():
     code = random.randint(111111, 999999)
     return code
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
