@@ -45,7 +45,7 @@ def confirm_email(request):
                 email = request.POST['email'],
                 code=code
             )
-        return redirect('signup', confirmation=confirmation)
+        return redirect('signup', confirmation=confirmation.id)
     else:
         return render(request, 'confirm_email.html')
 
