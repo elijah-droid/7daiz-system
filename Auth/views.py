@@ -41,7 +41,7 @@ def confirm_email(request):
             confirmation.code = code
             confirmation.save()
         except EmailConfirmation.DoesNotExist:
-            confirmation = EmailConfimation.objects.create(
+            confirmation = EmailConfirmation.objects.create(
                 email = request.POST['email'],
                 code=code
             )
