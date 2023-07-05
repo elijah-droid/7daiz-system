@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 import random
 from .models import EmailConfirmation
+from django.contrib.auth.models import User
 
 def generate_otp():
     code = random.randint(111111, 999999)
@@ -55,16 +56,22 @@ def signup(request, confirmation):
     if request.method == 'POST':
         if int(request.POST['code']) == confirmation.code:
             data = request.POST
-            user = User.objects.create(
-                username=confirmation.email,
-                first_name=data['firstname'],
-                last_name=data['lastname'],
-                email=confirmation.email,
-                password=make_password(request.POST['password'])
-            )
-            message.success(request, 'Account created successfully.')
+            if data['password'] == data['confirmpassword']:
+                user = User.objects.create(
+                    username=confirmation.email,
+                    first_name=data['firstname'],
+                    last_name=data['lastname'],
+                    email=confirmation.email,
+                    password=make_password(request.POST['password'])
+                )
+                message.success(request, 'Account created successfully.')
+                return redirect('login')
+            else:
+                messages.success(request, 'Passwords do not match.')
+                return redirect('.')
         else:
             messages.success(request, 'Invalid Code')
+            return redirect('.')
     else:
         return render(request, 'signup.html')
 
