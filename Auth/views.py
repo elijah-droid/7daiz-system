@@ -31,7 +31,7 @@ def confirm_email(request):
         try:
             User.objects.get(email=request.POST['email'])
             message.success(request, 'Email already in use!')
-            returm redirect('.')
+            return redirect('.')
         except User.DoesNotExist:
             pass
         code =  generate_otp()
