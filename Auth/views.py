@@ -28,6 +28,12 @@ def login(request):
 
 def confirm_email(request):
     if request.method == 'POST':
+        try:
+            User.objects.get(email=request.POST['email'])
+            message.success(request, 'Email already in use!')
+            returm redirect('.')
+        except User.DoesNotExist:
+            pass
         code =  generate_otp()
         message = f'''
             Your O-T-P code is {code}
