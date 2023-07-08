@@ -1,5 +1,7 @@
 from django.shortcuts import render
 import plotly.graph_objects as go
+from django.utils.timezone import now
+from django.db.models import Sum
 
 
 def dashboard(request):
@@ -32,8 +34,10 @@ def dashboard(request):
 
     # Convert the figure to HTML
     bar = fig.to_html(full_html=False)
+    today_sales = request.user.employee.Branch.Sales.filter(Date__date=now().date(), Refunded=False).aggregate(total=Sum('Money_Collected'))['total']
     context = {
         'chart': chart_html,
-        'bar': bar
+        'bar': bar,
+        'sales': today_sales
     }
     return render(request, 'employee_dashboard.html', context)

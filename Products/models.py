@@ -5,3 +5,6 @@ class Product(models.Model):
     Stock = models.ManyToManyField('Stock.Stock')
     Sales = models.ManyToManyField('Sales.Sale')
     Price = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.Name

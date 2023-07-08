@@ -61,6 +61,15 @@
                     <a href="{% url 'printing' %}" class="nav-item nav-link">Printing</a>
                     <a href="{% url 'stock' %}" class="nav-item nav-link">Stock</a>
                     <a href="{% url 'reports' %}" class="nav-item nav-link">Reports</a>
+                    <a href="{% url 'expenses' %}" class="nav-item nav-link">Expenses</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Branch</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            {% for branch in branches %}
+                            <a href="" class="dropdown-item {% if user.employee.Branch == branch %}active{% endif %}">{{branch.Name}}</a>
+                            {% endfor %}
+                        </div>
+                    </div> 
                     {% endif %}
                 </div>
             </div>

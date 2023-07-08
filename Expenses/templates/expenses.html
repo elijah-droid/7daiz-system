@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding-top: 50;" class="container text-dark">
+    <div class="text-center">
+        <small class="lead">Expenses</small>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <small></small>
+        <a href="{% url 'new-expense' %}" class="btn btn-sm btn-dark">New</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark">
+            <thead>
+                <tr class="text-dark">
+                    <th scope="col">Date</th>
+                    <th scope="col">Reason</th>
+                    <th class="text-nowrap" scope="col">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in user.employee.Branch.Expenses.all %}
+                <tr>
+                    <td class="text-nowrap text-dark">{{paper.product}}</td>
+                    <td class="text-nowrap text-dark">{{paper.format}}</td>
+                    <td class="text-nowrap text-dark">{{paper.Price}}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No Expenses for today.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

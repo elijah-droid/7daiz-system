@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load stocktags %}
 
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
@@ -14,6 +15,7 @@
         <table class="table table-bordered text-dark">
             <thead>
                 <tr class="text-dark">
+                    <th scope="col">Last Restock</th>
                     <th scope="col">Product</th>
                     <th scope="col">Price</th>
                     <th class="text-nowrap" scope="col">Items Left</th>
@@ -22,20 +24,23 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tally in tallies %}
+                {% for product in products %}
+                {% with stock=product|stock:user.employee.Branch %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{tally.Score.Subject}}</td>
-                    <td class="text-nowrap text-dark">{{tally.Score.Report.Student}}</td>
-                    <td class="text-nowrap">{{tally.Score.Report.Examination}}</td>
-                    <td class="text-nowrap">{{tally.From}}</td>
-                    <td class="text-nowrap">{{tally.To}}</td>
+                    <td class="text-nowrap text-dark">{{stock.Date}}</td>
+                    <td class="text-nowrap text-dark">{{product.Name}}</td>
+                    <td class="text-nowrap">UGX {{product.Price}}</td>
+                    <td class="text-nowrap">{{stock.Quantity}}</td>
+                    <td class="text-nowrap">{{stock.Items_Sold}}</td>
+                    <td class="text-nowrap">{{stock.Alert_Level}}</td>
                     <td class="text-nowrap">
-                        <a href="" class="btn btn-sm btn-dark">Reverse</a>
+                        <a href="" class="btn btn-sm btn-dark">Edit</a>
                     </td>
                 </tr>
+                {% endwith %}
                 {% empty %}
                 <tr>
-                    <td>No sales for today.</td>
+                    <td>No stock found.</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load tz %}
+{% load salesfilters %}
+{% load printingfilters %}
+{% load reportfilters %}
 
 
 {% block content %}
             {% if perms.Reports.view_report %}
             <div class="mt-3 text-center"> 
-                <small class="lead text-dark"><u>{{user.schooladministrator.current_school}} Dashboard</u></small>
+                <small class="lead text-dark"><u>Dashboard ({{user.employee.Branch}})</u></small>
             </div>
             {% endif %}
             <!-- Sale & Revenue Start -->
@@ -17,7 +20,7 @@
                             <i class="bi bi-box-seam fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Sales</p>
-                                <h6 class="mb-0 text-white">UGX 50,000</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|salestotal}}</h6>
                             </div>
                         </div>
                     </div>
@@ -26,7 +29,7 @@
                             <i class="bi bi-printer fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Printing</p>
-                                <h6 class="mb-0 text-white">UGX 100,000</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|printingtotal}}</h6>
                             </div>
                         </div>
                     </div>
@@ -44,7 +47,7 @@
                             <i class="bi bi-wallet fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Grand Total</p>
-                                <h6 class="mb-0 text-white">UGX 150,000</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|grandtotal}}</h6>
                             </div>
                         </div>
                     </div>

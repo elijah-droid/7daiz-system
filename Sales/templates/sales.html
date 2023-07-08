@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load salesfilters %}
 
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
@@ -18,19 +19,19 @@
                     <th scope="col">Product</th>
                     <th class="text-nowrap" scope="col">Quantity</th>
                     <th class="text-nowrap" scope="col">Unit Price</th>
-                    <th class="text-nowrap" scope="col">Total Amount</th>
+                    <th class="text-nowrap" scope="col">Amount Paid</th>
                 </tr>
             </thead>
             <tbody>
-                {% for tally in tallies %}
+                {% for sale in user.employee.Branch.Sales.all %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{tally.Score.Subject}}</td>
-                    <td class="text-nowrap text-dark">{{tally.Score.Report.Student}}</td>
-                    <td class="text-nowrap">{{tally.Score.Report.Examination}}</td>
-                    <td class="text-nowrap">{{tally.From}}</td>
-                    <td class="text-nowrap">{{tally.To}}</td>
+                    <td class="text-nowrap text-dark">{{sale.Date}}</td>
+                    <td class="text-nowrap text-dark">{{sale.Product}}</td>
+                    <td class="text-nowrap">{{sale.Quantity}}</td>
+                    <td class="text-nowrap">UGX {{sale.Product.Price}}</td>
+                    <td class="text-nowrap">UGX {{sale.Money_Collected}}</td>
                     <td class="text-nowrap">
-                        <a href="" class="btn btn-sm btn-dark">Reverse</a>
+                        <a href="" class="btn btn-sm btn-dark">Refund</a>
                     </td>
                 </tr>
                 {% empty %}
@@ -38,6 +39,15 @@
                     <td>No sales for today.</td>
                 </tr>
                 {% endfor %}
+                <tr>
+                    <td class="text-nowrap text-dark">Total</td>
+                    <td class="text-nowrap text-dark"></td>
+                    <td class="text-nowrap"></td>
+                    <td class="text-nowrap"></td>
+                    <td class="text-nowrap">UGX {{user.employee.Branch|salestotal}}</td>
+                    <td class="text-nowrap">
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
