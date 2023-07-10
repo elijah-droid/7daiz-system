@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import ExpenseForm
 
 def expenses(request):
@@ -12,7 +12,9 @@ def add_expense(request):
     if request.method == 'POST':
         form = ExpenseForm(request.POST)
         if form.is_valid():
-            expense = form.save()
+            expense = form.save(commit=False)
+            expense.Branch = request.user.employee.Branch
+            expense.save()
             request.user.employee.Branch.Expenses.add(expense)
             return redirect('expenses')
     else:

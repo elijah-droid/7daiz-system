@@ -11,4 +11,5 @@ def stock(product, branch):
         stock = Stock.objects.get(Product=product, Branch=branch)
         return stock
     except:
-        pass
+        stock = Stock.objects.create(Product=product, Branch=branch, Quantity=0)
+        return stock

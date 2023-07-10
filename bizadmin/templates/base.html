@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
 
 <head>
@@ -52,7 +53,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'employee-dashboard' %}" class="nav-item nav-link active">Home</a>
                     {% if not user.is_authenticated %}
                     <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
                     <a href="{% url 'confirm-email' %}" class="nav-item nav-link">Signup</a>
@@ -66,10 +67,11 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Branch</a>
                         <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
                             {% for branch in branches %}
-                            <a href="" class="dropdown-item {% if user.employee.Branch == branch %}active{% endif %}">{{branch.Name}}</a>
+                            <a href="{% url 'switch-branch' branch.id %}" class="dropdown-item {% if user.employee.Branch == branch %}active{% endif %}">{{branch.Name}}</a>
                             {% endfor %}
                         </div>
                     </div> 
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
                     {% endif %}
                 </div>
             </div>

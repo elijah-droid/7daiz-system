@@ -4,7 +4,7 @@
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
     <div class="text-center">
-        <small class="lead">Today's Prints</small>
+        <h5>Today's Prints</h5>
     </div>
     <hr>
     <div class="d-flex justify-content-between mb-3">
@@ -23,9 +23,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for printing in user.employee.Branch.Printing.all %}
+                {% for printing in printing %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{printing.Date}}</td>
+                    <td class="text-nowrap text-dark">{{printing.Date|date:"l, jS F, Y"}} at {{printing.Date|time:"g:i A"}}</td>
                     <td class="text-nowrap text-dark">{{printing.Paper}}</td>
                     <td class="text-nowrap">{{printing.No_of_Papers}}</td>
                     <td class="text-nowrap">UGX {{printing.Paper.Price}}</td>

@@ -14,4 +14,7 @@ def grandtotal(branch):
     printingtotal = branch.Printing.filter(Date__date=now().date()).aggregate(total=Sum('Amount_Paid'))['total']
     if not printingtotal:
         printingtotal = 0
-    return printingtotal + salestotal
+    expensetotal = branch.Expenses.filter(Date__date=now().date()).aggregate(total=Sum('Amount'))['total']
+    if not expensetotal:
+        expensetotal = 0
+    return (printingtotal + salestotal) - expensetotal

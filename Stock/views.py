@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import StockForm
 from Products.models import Product
 from django.contrib import messages
+from .models import Stock
 
 def stock(request):
     products = Product.objects.all()
@@ -25,3 +26,18 @@ def add_stock(request, product):
         return redirect('stock')
     else:
         return render(request, 'add_stock.html', context)
+
+
+def edit_stock(request, stock):
+    stock = Stock.objects.get(id=stock)
+    form = StockForm(instance=stock)
+    context = {
+        'form': form
+    }
+    if request.method == 'POST':
+        form = StockForm(request.POST, instance=stock)
+        if form.is_valid():
+            stock = form.save()
+            return redirect('stock')
+    else:
+        return render(request, 'edit_stock.html', context)

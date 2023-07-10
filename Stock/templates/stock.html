@@ -4,7 +4,7 @@
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
     <div class="text-center">
-        <small class="lead">Stock</small>
+        <h5  class="lead">Stock</h5>
     </div>
     <hr>
     <div class="d-flex justify-content-between mb-3">
@@ -27,14 +27,16 @@
                 {% for product in products %}
                 {% with stock=product|stock:user.employee.Branch %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{stock.Date}}</td>
+                    
+                    <td class="text-nowrap text-dark">{{stock.Date|date:"l, jS F, Y"}} at {{stock.Date|time:"g:i A"}}</td>
+                    
                     <td class="text-nowrap text-dark">{{product.Name}}</td>
                     <td class="text-nowrap">UGX {{product.Price}}</td>
                     <td class="text-nowrap">{{stock.Quantity}}</td>
                     <td class="text-nowrap">{{stock.Items_Sold}}</td>
                     <td class="text-nowrap">{{stock.Alert_Level}}</td>
                     <td class="text-nowrap">
-                        <a href="" class="btn btn-sm btn-dark">Edit</a>
+                        <a href="{% url 'edit-stock' stock.id %}" class="btn btn-sm btn-primary">Edit</a>
                     </td>
                 </tr>
                 {% endwith %}

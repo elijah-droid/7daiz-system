@@ -13,4 +13,4 @@ class Paper(models.Model):
     Prints = models.ManyToManyField('Printing.Printing')
 
     def __str__(self):
-        return self.product.Name
+        return self.product.Name + ' ' + self.format

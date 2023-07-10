@@ -4,6 +4,8 @@
 {% load salesfilters %}
 {% load printingfilters %}
 {% load reportfilters %}
+{% load expensefilters %}
+{% load humanize %}
 
 
 {% block content %}
@@ -20,7 +22,7 @@
                             <i class="bi bi-box-seam fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Sales</p>
-                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|salestotal}}</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|salestotal|intcomma}}</h6>
                             </div>
                         </div>
                     </div>
@@ -29,7 +31,7 @@
                             <i class="bi bi-printer fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Printing</p>
-                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|printingtotal}}</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|printingtotal|intcomma}}</h6>
                             </div>
                         </div>
                     </div>
@@ -38,7 +40,7 @@
                             <i class="bi bi-receipt-cutoff fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Expenses</p>
-                                <h6 class="mb-0 text-white">UGX 15,000</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|expensetotal|intcomma}}</h6>
                             </div>
                         </div>
                     </div>
@@ -47,7 +49,7 @@
                             <i class="bi bi-wallet fa-3x"></i>
                             <div class="ms-3">
                                 <p class="mb-2 text-nowrap">Grand Total</p>
-                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|grandtotal}}</h6>
+                                <h6 class="mb-0 text-white">UGX {{user.employee.Branch|grandtotal|intcomma}}</h6>
                             </div>
                         </div>
                     </div>

@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import PrintingForm
 from Stock.models import Stock
+from django.utils.timezone import now
 
 def printing(request):
-    return render(request, 'printing.html')
+    printing = request.user.employee.Branch.Printing.filter(Date__date=now().date())
+    context = {
+        'printing': printing
+    }
+    return render(request, 'printing.html',context)
 
 def register(request):
     form = PrintingForm()

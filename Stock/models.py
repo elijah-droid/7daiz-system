@@ -7,6 +7,6 @@ class Stock(models.Model):
     Branch = models.ForeignKey('Branches.Branch', models.SET_NULL, null=True)
     Product = models.ForeignKey('Products.Product', models.CASCADE)
     Quantity = models.PositiveIntegerField()
-    Items_Sold = models.PositiveIntegerField(null=True)
+    Items_Sold = models.PositiveIntegerField(default=0)
     Price = models.PositiveIntegerField(null=True)
     Alert_Level = models.PositiveIntegerField(default=0)

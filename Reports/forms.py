@@ -8,8 +8,8 @@ class ReportForm(forms.ModelForm):
         model = Report
         fields = ['Sales', 'Printing', 'Grand_Total', 'Cash_Taken']
         widgets = {
-            'Sales': forms.NumberInput(attrs={'class': 'form-control'}),
-            'Printing': forms.NumberInput(attrs={'class': 'form-control'}),
-            'Grand_Total': forms.NumberInput(attrs={'class': 'form-control'}),
+            'Sales': forms.NumberInput(attrs={'class': 'form-control', 'readonly': ''}),
+            'Printing': forms.NumberInput(attrs={'class': 'form-control', 'readonly': ''}),
+            'Grand_Total': forms.NumberInput(attrs={'class': 'form-control', 'readonly': ''}),
             'Cash_Taken': forms.NumberInput(attrs={'class': 'form-control'}),
         }

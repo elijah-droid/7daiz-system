@@ -4,7 +4,7 @@
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
     <div class="text-center">
-        <small class="lead">Today's Sales</small>
+        <h5 class="lead">Today's Sales</h5>
     </div>
     <hr>
     <div class="d-flex justify-content-between mb-3">
@@ -23,9 +23,9 @@
                 </tr>
             </thead>
             <tbody>
-                {% for sale in user.employee.Branch.Sales.all %}
+                {% for sale in sales %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{sale.Date}}</td>
+                    <td class="text-nowrap text-dark">{{sale.Date|date:"l, jS F, Y"}} at {{sale.Date|time:"g:i A"}}</td>
                     <td class="text-nowrap text-dark">{{sale.Product}}</td>
                     <td class="text-nowrap">{{sale.Quantity}}</td>
                     <td class="text-nowrap">UGX {{sale.Product.Price}}</td>

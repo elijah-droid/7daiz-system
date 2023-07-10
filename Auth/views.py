@@ -7,11 +7,14 @@ import random
 from .models import EmailConfirmation
 from django.contrib.auth.models import User
 
+
 def generate_otp():
     code = random.randint(111111, 999999)
     return code
 
 def login_user(request):
+    if request.user.is_authenticated:
+        return redirect('employee-dashboard')
     if request.method == 'POST':
         email = request.POST['email']
         password = request.POST['password']
@@ -94,3 +97,8 @@ def reset_password(request, reset):
         return redirect('login')
     else:
         return render(request, 'reset_password.html')
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')
