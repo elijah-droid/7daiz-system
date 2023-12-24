@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load printingfilters %}
+{% load humanize %}
 
 {% block content %}
 <div style="padding-top: 50;" class="container text-dark">
@@ -11,6 +12,18 @@
         <a href="{% url 'papers' %}" class="btn btn-sm btn-primary">Papers</a>
         <a href="{% url 'register-print' %}" class="btn btn-sm btn-dark">Register</a>
     </div>
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    {{chart|safe}}
+                </div>
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                  {{bar|safe}}
+              </div>                    
+            </div>
+        </div>
+    </div> 
     <div class="table-responsive">
         <table class="table table-bordered text-dark">
             <thead>
@@ -24,8 +37,8 @@
                 {% for staff in employees %}
                 <tr>
                     <td class="text-nowrap text-dark">{{staff}}</td>
-                    <td class="text-nowrap text-dark">{{staff.day_contribution}} UGX</td>
-                    <td class="text-nowrap">{{printing.No_of_Papers}}</td>
+                    <td class="text-nowrap text-dark">{{staff.day_contribution|intcomma}} UGX</td>
+                    <td class="text-nowrap">{{staff.month_contribution|intcomma}} UGX</td>
                 </tr>
                 {% empty %}
                 <tr>

@@ -22,3 +22,11 @@ class Employee(models.Model):
         figures = [printing_sum['printing'], large_format_sum['large_format'], sales_sum['sales']]
         cash = [cash for cash in figures if cash != None]
         return sum(cash)
+
+    def month_contribution(self):
+        printing_sum = self.printing_attribute.filter(Date__date__month=now().month).aggregate(printing=Sum('Amount_Paid'))
+        large_format_sum = self.large_format_attribute.filter(Date__date__month=now().month).aggregate(large_format=Sum('Amount_Paid'))
+        sales_sum = self.sales_attribute.filter(Date__date__month=now().month).aggregate(sales=Sum('Money_Collected'))
+        figures = [printing_sum['printing'], large_format_sum['large_format'], sales_sum['sales']]
+        cash = [cash for cash in figures if cash != None]
+        return sum(cash)

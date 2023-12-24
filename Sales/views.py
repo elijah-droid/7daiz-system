@@ -3,6 +3,9 @@ from .forms import SalesForm
 from django.utils.timezone import now
 from Stock.models import Stock
 from Products.models import Product
+import pandas as pd
+from .models import Sale
+from django.db import models
 
 def sales(request):
     sales = request.user.employee.Branch.Sales.filter(Date__date=now().date())
@@ -37,3 +40,14 @@ def register(request):
     else:
         return render(request, 'register_sale.html', context)
 
+
+def export_sales(request):
+    queryset = Sale.objects.all()
+    queryset = queryset.annotate(
+        Date_Time=models.functions.Cast(models.F('Date'), models.CharField()
+    ))
+    data = pd.DataFrame(list(queryset.values('Date_Time' ,'Product__Name', 'Quantity', 'Money_Collected', 'Money_Expected', 'Staff__user__first_name', )))
+
+    excel_file_path = 'data_export_pandas.xlsx'
+
+    data.to_excel(excel_file_path, index=False)

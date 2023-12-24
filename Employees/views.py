@@ -7,6 +7,9 @@ from django.db.models import Q
 from Sales.models import Sale
 from Printing.models import Printing
 from .models import Employee
+import plotly.express as px
+import plotly.offline as opy
+import pandas as pd
 
 
 def dashboard(request):
@@ -68,7 +71,22 @@ def dashboard(request):
 
 def staff(request):
     employees = Employee.objects.all()
+    total_earnings = sum([staff.month_contribution() for staff in employees])
+
+    data = {
+        'Staff': [str(staff) for staff in employees],
+        'Performance': [(staff.month_contribution()/total_earnings) * 100 for staff in employees]  # Monthly performance scores
+    }
+
+    df = pd.DataFrame(data)
+
+    # Create a pie chart using Plotly Express
+    fig = px.pie(df, values='Performance', names='Staff', title='Staff Monthly Performance')
+
+    # Convert the plot to HTML
+    plot_html = opy.plot(fig, auto_open=False, output_type='div')
     context = {
-        'employees': employees
+        'employees': employees,
+        'chart': plot_html
     }
     return render(request, 'staff.html', context)
