@@ -32,7 +32,8 @@ def edit_stock(request, stock):
     stock = Stock.objects.get(id=stock)
     form = StockForm(instance=stock)
     context = {
-        'form': form
+        'form': form,
+        'stock': stock    
     }
     if request.method == 'POST':
         form = StockForm(request.POST, instance=stock)
@@ -41,3 +42,6 @@ def edit_stock(request, stock):
             return redirect('stock')
     else:
         return render(request, 'edit_stock.html', context)
+
+def delete_stock(request):
+    pass

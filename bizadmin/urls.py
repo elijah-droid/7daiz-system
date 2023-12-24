@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import index
 
+admin.site.title = '7daiz'
+
 urlpatterns = [
     path('', index, name='home'),
     path('auth/', include('Auth.urls')),
@@ -14,5 +16,6 @@ urlpatterns = [
     path('papers/', include('Papers.urls')),
     path('expenses/', include('Expenses.urls')),
     path('branches/', include('Branches.urls')),
+    path('largeformat/', include('Largeformat.urls')),
     path('admin/', admin.site.urls),
 ]

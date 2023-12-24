@@ -9,7 +9,9 @@
     <hr>
     <div class="d-flex justify-content-between mb-3">
         <small class="lead text-dark"></small>
+        {% if user.employee.is_admin %}
         <a href="{% url 'add-product' %}" class="btn btn-sm btn-dark">Add Product</a>
+        {% endif %}
     </div>
     <div class="table-responsive">
         <table class="table table-bordered text-dark">
@@ -35,9 +37,11 @@
                     <td class="text-nowrap">{{stock.Quantity}}</td>
                     <td class="text-nowrap">{{stock.Items_Sold}}</td>
                     <td class="text-nowrap">{{stock.Alert_Level}}</td>
+                    {% if user.employee.is_admin %}
                     <td class="text-nowrap">
                         <a href="{% url 'edit-stock' stock.id %}" class="btn btn-sm btn-primary">Edit</a>
                     </td>
+                    {% endif %}
                 </tr>
                 {% endwith %}
                 {% empty %}

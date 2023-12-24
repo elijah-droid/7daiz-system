@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="padding-top: 50;" class="container text-dark">
+    <div class="text-center">
+        <small class="lead">Large Format Rolls</small>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <small></small>
+        <a href="{% url 'add-roll' %}" class="btn btn-sm btn-dark">New Roll</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark">
+            <thead>
+                <tr class="text-dark">
+                    <th scope="col">Roll</th>
+                    <th scope="col">Width</th>
+                    <th class="text-nowrap" scope="col">Price per sq meter</th>
+                    <th class="text-nowrap" scope="col">Meters Printed</th>
+                    <th class="text-nowrap" scope="col">Meters Left</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for roll in rolls %}
+                <tr>
+                    <td class="text-nowrap text-dark">{{roll.Type}}</td>
+                    <td class="text-nowrap text-dark">{{roll.Width}}</td>
+                    <td class="text-nowrap text-dark">{{roll.Price_per_sq_meter}} UGX</td>
+                    <td class="text-nowrap text-dark">{{roll.Meters_Sold}}</td>
+                    <td class="text-nowrap text-dark">{{roll.Meters_Left}}</td>
+                    
+                    <td class="text-nowrap">
+                        <a href="{% url 'edit-roll' roll.id %}" class="btn btn-sm btn-warning">Edit</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No rolls available.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

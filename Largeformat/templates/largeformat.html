@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load printingfilters %}
+
+{% block content %}
+<div style="padding-top: 50;" class="container text-dark">
+    <div class="text-center">
+        <h5>Today's Largeformat Prints</h5>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="{% url 'rolls' %}" class="btn btn-sm btn-primary">Rolls</a>
+        <div class="btn-group">
+            <a href="{% url 'calculator' %}" class="btn btn-sm btn-primary">Calculator</a>
+            <a href="{% url 'register-largeformat' %}" class="btn btn-sm btn-dark">Register</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark">
+            <thead>
+                <tr class="text-dark">
+                    <th scope="col">Time</th>
+                    <th scope="col">Roll</th>
+                    <th class="text-nowrap" scope="col">Meters Printed</th>
+                    <th class="text-nowrap" scope="col">Staff</th>
+                    <th class="text-nowrap" scope="col">Amount Paid</th>
+                    <th class="text-nowrap" scope="col">Amount Expected</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for printing in large_format %}
+                <tr>
+                    <td class="text-nowrap text-dark">{{printing.Date|date:"l, jS F, Y"}} at {{printing.Date|time:"g:i A"}}</td>
+                    <td class="text-nowrap text-dark">{{printing.Roll}}</td>
+                    <td class="text-nowrap">{{printing.Total_Meters_Printed}}</td>
+                    <td class="text-nowrap">{{printing.Staff}}</td>
+                    <td class="text-nowrap">{{printing.Amount_Paid}} UGX</td>
+                    <td class="text-nowrap">{{printing.Amount_Expected}} UGX</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No prints for today.</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td class="text-nowrap text-dark">Total</td>
+                    <td class="text-nowrap text-dark"></td>
+                    <td class="text-nowrap"></td>
+                    <td class="text-nowrap"></td>
+                    <td class="text-nowrap"></td>
+                    <td class="text-nowrap">UGX {{user.employee.Branch|printingtotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

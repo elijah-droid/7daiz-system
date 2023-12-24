@@ -1,8 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import ExpenseForm
+from .models import Expense
+from django.utils.timezone import now
 
 def expenses(request):
-    return render(request, 'expenses.html')
+    expenses = Expense.objects.filter(Date__date=now().date(), Branch=request.user.employee.Branch)
+    context = {
+        'expenses': expenses
+    }
+    return render(request, 'expenses.html', context)
 
 def add_expense(request):
     form = ExpenseForm()

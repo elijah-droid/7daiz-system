@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4^sfriuw@dsb@6n+&(n!olqq8&m45o)f$huag9^nqlrehgszre
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '7daizentries.edu-metrics.com']
+ALLOWED_HOSTS = ['127.0.0.1', '7daizentries.edu-metrics.com', '169.254.228.235']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.edu-metrics.com'
@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'Stock',
     'Reports',
     'bizadmin',
-    'Auth'
+    'Auth',
+    'Largeformat'
 ]
 
 MIDDLEWARE = [
@@ -128,7 +129,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Kampala'
 
 USE_I18N = True
 
@@ -136,6 +136,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_ZONE = 'Africa/Kampala'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+        <!-- Appointment Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="rounded">
+                    <div class="row g-0">
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                            <div class="h-100 d-flex flex-column justify-content-center p-3">
+                                <h5 class="mb-4">Largeformat Calculator</h5>
+                                <form method="post" action="." id="calculator">
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <div class="form-group mb-3">
+                                            <label for="username">Roll:</label>
+                                            <select class="form-control" name="roll" id="roll">
+                                                {% for roll in rolls %}
+                                                <option value="{{roll.Price_per_sq_meter}}">{{roll.Type}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>    
+                                        <div class="form-group mb-3">
+                                            <label for="username">Units:</label>
+                                            <select class="form-control" name="units" id="units">
+                                                <option value="1">Meters</option>
+                                                <option value="39.37">Inches</option>
+                                                <option value="100">Centimeters</option>
+                                                <option value="3.28">Feet</option>
+                                                <option value="1000">Millimeters</option>
+                                            </select>
+                                        </div>     
+                                        <div class="form-group mb-3">
+                                            <label for="width">Width:</label>
+                                            <input type="number" class="form-control" id="width" name="width" placeholder="Enter measurements">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="username">Height:</label>
+                                            <input type="number" class="form-control" id="height" name="height" placeholder="Enter measurements">
+                                        </div>
+                                        <div class="col-lg-12 justify-content-between">
+                                            <b class="text-primary" id="output">The Total is 0 UGX</b>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="min-height: 400px;">
+                            <div class="position-relative h-100">
+                                <img class="position-absolute w-100 h-100 rounded" src="https://th.bing.com/th/id/R.d27893bdc5f65fea801827398ff5995a?rik=ydL2L8peJwmEmg&pid=ImgRaw&r=0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Get the form element
+            var calculator = document.getElementById('calculator');
+
+            function addCommasToInteger(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            function calculate_total (price, base, width, height, roll) {
+                width_meters = (width/base);
+                height_meters = (height/base);
+                meters=width_meters*height_meters;
+                total = meters * price
+                output = document.getElementById('output');
+                output.innerHTML = `The total for ${width_meters} by ${height_meters} meters of a ${roll} is ` +addCommasToInteger(Math.floor(total))+ ' UGX';
+            };
+        
+            // Add an event listener for the 'change' event on the form
+            calculator.addEventListener('change', function(event) {
+              // This function will be called when the value of any form field changes
+                roll = document.getElementById('roll');
+                units = document.getElementById('units');
+                width = document.getElementById('width');
+                height = document.getElementById('height');
+                calculate_total(roll.value, units.value, width.value, height.value);
+              // You can perform any action you want here, for example, updating another element on the page
+              var outputElement = document.getElementById('output');
+              
+            });
+          </script>
+        <!-- Appointment End -->
+{% endblock %}

@@ -26,12 +26,13 @@
                     <td class="text-nowrap text-dark">{{paper.format}}</td>
                     <td class="text-nowrap text-dark">{{paper.Price}}</td>
                     <td class="text-nowrap">
-                        <a href="" class="btn btn-sm btn-primary">Delete</a>
+                        <a href="{% url 'delete-paper' paper.id %}" class="btn btn-sm btn-primary">Delete</a>
+                        <a href="{% url 'edit-paper' paper.id %}" class="btn btn-sm btn-warning">Edit</a>
                     </td>
                 </tr>
                 {% empty %}
                 <tr>
-                    <td>No prints for today.</td>
+                    <td>No papers available.</td>
                 </tr>
                 {% endfor %}
             </tbody>

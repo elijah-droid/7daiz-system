@@ -3,7 +3,18 @@
 
 
 {% block content %}
+
 <div class="container-xxl py-5">
+    <div class="text-center">
+        <h5  class="lead">Stock</h5>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <small class="lead text-dark"></small>
+        {% if user.employee.is_admin %}
+        <a href="{% url 'edit-product' stock.Product.id  %}" class="btn btn-sm btn-dark">Edit Product</a>
+        {% endif %}
+    </div>
     <div class="container">
         <div class="rounded">
             <div class="row g-0">

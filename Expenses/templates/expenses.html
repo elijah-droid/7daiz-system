@@ -9,7 +9,7 @@
     </div>
     <hr>
     <div class="d-flex justify-content-between mb-3">
-        <small></small>
+        <a href="" class="btn btn-sm btn-warning">Export</a>
         <a href="{% url 'new-expense' %}" class="btn btn-sm btn-dark">New</a>
     </div>
     <div class="table-responsive">
@@ -22,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for expense in user.employee.Branch.Expenses.all %}
+                {% for expense in expenses %}
                 <tr>
                     <td class="text-nowrap text-dark">{{expense.Date|date:"l, jS F, Y"}} at {{expense.Date|time:"g:i A"}}</td>
                     <td class="text-nowrap text-dark">{{expense.Reason}}</td>

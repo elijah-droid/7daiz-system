@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load printingfilters %}
+
+{% block content %}
+<div style="padding-top: 50;" class="container text-dark">
+    <div class="text-center">
+        <h5>Staff Performance</h5>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between mb-3">
+        <a href="{% url 'papers' %}" class="btn btn-sm btn-primary">Papers</a>
+        <a href="{% url 'register-print' %}" class="btn btn-sm btn-dark">Register</a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered text-dark">
+            <thead>
+                <tr class="text-dark">
+                    <th scope="col">Staff</th>
+                    <th scope="col">24 hr</th>
+                    <th class="text-nowrap" scope="col">Monthly</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in employees %}
+                <tr>
+                    <td class="text-nowrap text-dark">{{staff}}</td>
+                    <td class="text-nowrap text-dark">{{staff.day_contribution}} UGX</td>
+                    <td class="text-nowrap">{{printing.No_of_Papers}}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No data here.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

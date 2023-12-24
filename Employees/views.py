@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from django.db.models import Q
 from Sales.models import Sale
 from Printing.models import Printing
+from .models import Employee
 
 
 def dashboard(request):
@@ -63,3 +64,11 @@ def dashboard(request):
         'sales': today_sales
     }
     return render(request, 'employee_dashboard.html', context)
+
+
+def staff(request):
+    employees = Employee.objects.all()
+    context = {
+        'employees': employees
+    }
+    return render(request, 'staff.html', context)

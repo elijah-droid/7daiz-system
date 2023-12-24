@@ -7,3 +7,4 @@ class Printing(models.Model):
     Paper = models.ForeignKey('Papers.Paper', models.CASCADE)
     No_of_Papers = models.PositiveIntegerField()
     Amount_Paid = models.PositiveIntegerField()
+    Staff = models.ForeignKey('Employees.Employee', models.CASCADE, null=True, blank=True, related_name='employee_print')
