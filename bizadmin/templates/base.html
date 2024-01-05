@@ -58,13 +58,18 @@
                     <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
                     <a href="{% url 'confirm-email' %}" class="nav-item nav-link">Signup</a>
                     {% else %}
-                    <a href="{% url 'sales' %}" class="nav-item nav-link">Sales</a>
-                    <a href="{% url 'printing' %}" class="nav-item nav-link">Printing</a>
-                    <a href="{% url 'largeformat' %}" class="nav-item nav-link">Largeformat</a>
-                    <a href="{% url 'staff' %}" class="nav-item nav-link">Staff</a>
-                    <a href="{% url 'stock' %}" class="nav-item nav-link">Stock</a>
-                    <a href="{% url 'reports' %}" class="nav-item nav-link">Reports</a>
-                    <a href="{% url 'expenses' %}" class="nav-item nav-link">Expenses</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Modules</a>
+                        <div class="dropdown-menu rounded-0 rounded-bottom border-0 shadow-sm m-0">
+                            <a href="{% url 'sales' %}" class="dropdown-item">Sales</a>
+                            <a href="{% url 'printing' %}" class="dropdown-item">Printing</a>
+                            <a href="{% url 'largeformat' %}" class="dropdown-item">Largeformat</a>
+                            <a href="{% url 'staff' %}" class="dropdown-item">Staff</a>
+                            <a href="{% url 'stock' %}" class="dropdown-item">Stock</a>
+                            <a href="{% url 'reports' %}" class="dropdown-item">Reports</a>
+                            <a href="{% url 'expenses' %}" class="dropdown-item">Expenses</a>
+                        </div>
+                    </div> 
                     {% if user.employee.is_admin %}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Branch</a>

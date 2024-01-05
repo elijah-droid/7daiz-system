@@ -70,21 +70,24 @@ def dashboard(request):
 
 
 def staff(request):
-    employees = Employee.objects.all()
-    total_earnings = sum([staff.month_contribution() for staff in employees])
+    try:
+        employees = Employee.objects.all()
+        total_earnings = sum([staff.month_contribution() for staff in employees])
 
-    data = {
-        'Staff': [str(staff) for staff in employees],
-        'Performance': [(staff.month_contribution()/total_earnings) * 100 for staff in employees]  # Monthly performance scores
-    }
+        data = {
+            'Staff': [str(staff) for staff in employees],
+            'Performance': [(staff.month_contribution()/total_earnings) * 100 for staff in employees]  # Monthly performance scores
+        }
 
-    df = pd.DataFrame(data)
+        df = pd.DataFrame(data)
 
-    # Create a pie chart using Plotly Express
-    fig = px.pie(df, values='Performance', names='Staff', title='Staff Monthly Performance')
+        # Create a pie chart using Plotly Express
+        fig = px.pie(df, values='Performance', names='Staff', title='Staff Monthly Performance')
 
-    # Convert the plot to HTML
-    plot_html = opy.plot(fig, auto_open=False, output_type='div')
+        # Convert the plot to HTML
+        plot_html = opy.plot(fig, auto_open=False, output_type='div')
+    except:
+        plot_html = 'No performance data for today'
     context = {
         'employees': employees,
         'chart': plot_html

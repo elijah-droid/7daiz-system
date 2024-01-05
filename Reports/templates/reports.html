@@ -23,13 +23,14 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tally in tallies %}
+                {% for report in user.employee.Branch.Reports.all %}
                 <tr>
-                    <td class="text-nowrap text-dark">{{tally.Score.Subject}}</td>
-                    <td class="text-nowrap text-dark">{{tally.Score.Report.Student}}</td>
-                    <td class="text-nowrap">{{tally.Score.Report.Examination}}</td>
-                    <td class="text-nowrap">{{tally.From}}</td>
-                    <td class="text-nowrap">{{tally.To}}</td>
+                    <td class="text-nowrap text-dark">{{report.Date}}</td>
+                    <td class="text-nowrap text-dark">{{report.Printing}}</td>
+                    <td class="text-nowrap">{{report.Sales}}</td>
+                    <td class="text-nowrap">{{report.Grand_Total}}</td>
+                    <td class="text-nowrap">{{report.Cash_Taken}}</td>
+                    <td class="text-nowrap">{{report.Balance}}</td>
                     <td class="text-nowrap">
                         <a href="" class="btn btn-sm btn-dark">Reverse</a>
                     </td>
